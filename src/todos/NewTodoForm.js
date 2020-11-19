@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createTodo } from "../actions/todoAction";
+import { addTodoRequest } from "../thunks/todoThunks"
 
 import "./NewTodoForm.css";
 
+
+
 const NewTodoForm = ({ todos, fireCreateTodo }) => {
   const [inputValue, setInputValue] = useState("");
+
+  const keyPressed = e => {
+    if(e.keyCode == 13)
+    {
+      fireCreateTodo(inputValue)
+      setInputValue("");
+    }
+      
+  }
 
   return (
     <div className="new-todo-form">
@@ -14,6 +25,7 @@ const NewTodoForm = ({ todos, fireCreateTodo }) => {
         value={inputValue}
         placeholder="Add New Todo"
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={keyPressed}
         type="text"
       />
       <button
@@ -33,11 +45,11 @@ const NewTodoForm = ({ todos, fireCreateTodo }) => {
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos,
+  todos: state.todos.list,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fireCreateTodo: (text) => dispatch(createTodo(text)),
+  fireCreateTodo: (text) => dispatch(addTodoRequest(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTodoForm);

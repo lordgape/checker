@@ -10,13 +10,13 @@ const TodoListItem = ({ todo, fireRemoveTodo, fireMarkTodoAsCompleted }) => {
         {todo.isCompleted ? null : (
           <button
             className="completed-button"
-            onClick={() => fireMarkTodoAsCompleted(todo.text)}
+            onClick={() => fireMarkTodoAsCompleted(todo.id)}
           >
             Mark as Completed{" "}
           </button>
         )}
         <button
-          onClick={() => fireRemoveTodo(todo.text)}
+          onClick={() => fireRemoveTodo(todo.id)}
           className="remove-button"
         >
           Remove
