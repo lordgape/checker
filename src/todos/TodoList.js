@@ -1,11 +1,17 @@
 import{React, useEffect} from "react";
 import { connect } from "react-redux";
 import TodoListItem from "./TodoListItem";
-import "./TodoList.css";
 import NewTodoForm from "./NewTodoForm";
 import { loadTodosRequest, markAsCompletedRequest, removeTodoRequest } from "../thunks/todoThunks";
+import { getCompletedTodos, getIncompletedTodos, getTodos, isTodoLoading } from "../selectors/todoSelectors";
+import styled from "styled-components"
 
-const TodoList = ({ todos = [], fireRemoveTodo, fireMarkTodoAsCompleted, fireLoadTodo, isLoading }) => {
+const ListWrapper = styled.div`
+  max-width: 700px;
+  margin: auto;
+`;
+
+const TodoList = ({ incompletedTodos, completedTodos, fireRemoveTodo, fireMarkTodoAsCompleted, fireLoadTodo, isLoading }) => {
 
   useEffect(() => {
     fireLoadTodo();
@@ -14,9 +20,10 @@ const TodoList = ({ todos = [], fireRemoveTodo, fireMarkTodoAsCompleted, fireLoa
   const loadingMessage =  <div>Loading Todos...</div>
 
   const content = (
-    <div className="list-wrapper">
+    <ListWrapper>
       <NewTodoForm />
-      {todos.map((todo, i) => (
+      <h3>Incompleted Todos:</h3>
+      {incompletedTodos.map((todo, i) => (
         <TodoListItem
           key={todo.id}
           todo={todo}
@@ -24,7 +31,16 @@ const TodoList = ({ todos = [], fireRemoveTodo, fireMarkTodoAsCompleted, fireLoa
           fireMarkTodoAsCompleted={fireMarkTodoAsCompleted}
         />
       ))}
-    </div>
+      <h3>Completed Todos:</h3>
+      {completedTodos.map((todo, i) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          fireRemoveTodo={fireRemoveTodo}
+          fireMarkTodoAsCompleted={fireMarkTodoAsCompleted}
+        />
+      ))}
+    </ListWrapper>
   );
   
 return isLoading ? loadingMessage : content;
@@ -32,8 +48,9 @@ return isLoading ? loadingMessage : content;
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos.list,
-  isLoading: state.todos.isLoading
+  completedTodos: getCompletedTodos(state),
+  incompletedTodos: getIncompletedTodos(state),
+  isLoading: isTodoLoading(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

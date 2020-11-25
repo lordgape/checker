@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addTodoRequest } from "../thunks/todoThunks"
-
-import "./NewTodoForm.css";
+import { getTodos } from "../selectors/todoSelectors";
+import { addTodoRequest } from "../thunks/todoThunks";
+import {NewTodoFormContainer, NewTodoInput, NewTodoButton } from  "./NewTodoFormStyled"
 
 
 
 const NewTodoForm = ({ todos, fireCreateTodo }) => {
   const [inputValue, setInputValue] = useState("");
 
-  const keyPressed = e => {
-    if(e.keyCode == 13)
-    {
-      fireCreateTodo(inputValue)
-      setInputValue("");
+  const keyPressed = (e) => {
+    if (e.keyCode == 13) {
+      const isDuplicated = todos.some((todo) => todo.text == inputValue);
+      if (!isDuplicated) {
+        fireCreateTodo(inputValue);
+        setInputValue("");
+      }
     }
-      
-  }
+  };
 
   return (
-    <div className="new-todo-form">
-      <input
+    <NewTodoFormContainer>
+      <NewTodoInput
         className="new-todo-input"
         value={inputValue}
         placeholder="Add New Todo"
@@ -28,7 +29,7 @@ const NewTodoForm = ({ todos, fireCreateTodo }) => {
         onKeyDown={keyPressed}
         type="text"
       />
-      <button
+      <NewTodoButton
         onClick={() => {
           const isDuplicated = todos.some((todo) => todo.text == inputValue);
           if (!isDuplicated) {
@@ -39,13 +40,13 @@ const NewTodoForm = ({ todos, fireCreateTodo }) => {
         className="new-todo-button"
       >
         Create Todo
-      </button>
-    </div>
+      </NewTodoButton>
+    </NewTodoFormContainer>
   );
 };
 
 const mapStateToProps = (state) => ({
-  todos: state.todos.list,
+  todos: getTodos(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,7 +8,7 @@ import {
 } from "../actions/todoAction";
 
 let initialTodoState = {
-  list: [],
+  data: [],
   isLoading: false,
 };
 
@@ -17,24 +17,24 @@ export const todos = (state = initialTodoState, action) => {
 
   switch (type) {
     case CREATE_TODO: {      
-      let newTodoList = state.list.concat(payload);
-      return { ...state, list: newTodoList };
+      let newTodoList = state.data.concat(payload);
+      return { ...state, data: newTodoList };
     }
     case REMOVE_TODO: {
-      let newTodoList = state.list.filter((todo) => payload.id !== todo.id);
-      return { ...state, list: newTodoList };
+      let newTodoList = state.data.filter((todo) => payload.id !== todo.id);
+      return { ...state, data: newTodoList };
     }
     case MARK_TODO_AS_COMPLETED: {
-      let newTodoList = state.list.map((todo) => {
+      let newTodoList = state.data.map((todo) => {
         if (payload.id == todo.id) todo.isCompleted = true;
         return todo;
       });
 
-      return { ...state, list: newTodoList };
+      return { ...state, data: newTodoList };
     }
 
     case LOAD_TODOS_SUCCESS: {
-      return { list: payload, isLoading: false };
+      return { data: payload, isLoading: false };
     }
     case LOAD_TODOS_FAILURE:
       return { ...state, isLoading: false };
