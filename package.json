@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
@@ -22,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-eco": "mocha \"src/test/**/*.test.js\"  --recursive",
+    "test-eco": "mocha --require esm \"src/test/**/*.test.js\"   --recursive",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,8 +44,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
+  "devDependencies": {    
     "chai": "^4.2.0",
+    "esm": "^3.2.25",
     "mocha": "^8.2.1"
   }
 }
