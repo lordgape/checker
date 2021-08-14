@@ -20,7 +20,7 @@ const TodoList = ({ incompletedTodos, completedTodos, fireRemoveTodo, fireMarkTo
   const loadingMessage =  <div>Loading Todos...</div>
 
   const content = (
-    <ListWrapper>
+    <ListWrapper id="specialList">
       <NewTodoForm />
       <h3>Incompleted Todos:</h3>
       {incompletedTodos.map((todo, i) => (

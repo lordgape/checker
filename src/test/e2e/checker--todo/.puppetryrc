@@ -1,0 +1,56 @@
+{
+  "name": "Checker Todo",
+  "appPanels": {
+    "suite": {
+      "panes": [
+        "groups"
+      ]
+    },
+    "settings": {
+      "panes": []
+    }
+  },
+  "groups": {
+    "c40ksbvukeo": {
+      "key": "c40ksbvukeo",
+      "value": true,
+      "tests": {
+        "c40ksbvukep": {
+          "key": "c40ksbvukep",
+          "value": true
+        }
+      }
+    },
+    "c40ksbw2dxu": {
+      "key": "c40ksbw2dxu",
+      "value": false,
+      "tests": {}
+    },
+    "c40ksbx8ebi": {
+      "key": "c40ksbx8ebi",
+      "value": true,
+      "tests": {
+        "c40ksbx8ebj": {
+          "key": "c40ksbx8ebj",
+          "value": true
+        },
+        "c40ksbxd7g8": {
+          "key": "c40ksbxd7g8",
+          "value": true
+        }
+      }
+    }
+  },
+  "savedAt": 1628959843,
+  "modified": false,
+  "lastOpenSuite": "create-flow.json",
+  "variables": {},
+  "targets": {},
+  "environments": [
+    "test",
+    "stage",
+    "production"
+  ],
+  "projectDirectory": "/home/chesvic/Documents/javascript-projects/checker/src/test/e2e/checker--todo",
+  "puppetry": "3.2.5"
+}
