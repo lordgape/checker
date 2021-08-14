@@ -16,7 +16,7 @@ export const todos = (state = initialTodoState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CREATE_TODO: {      
+    case CREATE_TODO: {
       let newTodoList = state.data.concat(payload);
       return { ...state, data: newTodoList };
     }
@@ -26,7 +26,7 @@ export const todos = (state = initialTodoState, action) => {
     }
     case MARK_TODO_AS_COMPLETED: {
       let newTodoList = state.data.map((todo) => {
-        if (payload.id == todo.id) todo.isCompleted = true;
+        if (payload.id === todo.id) todo.isCompleted = true;
         return todo;
       });
 
